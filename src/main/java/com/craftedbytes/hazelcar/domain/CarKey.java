@@ -1,9 +1,11 @@
 package com.craftedbytes.hazelcar.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by dbrimley on 11/07/2014.
  */
-public class CarKey {
+public class CarKey implements Serializable{
 
     private final long model_id;
     private final String model_make_id;
@@ -17,6 +19,26 @@ public class CarKey {
         this.model_name = model_name;
         this.model_trim = model_trim;
         this.model_year = model_year;
+    }
+
+    public long getModel_id() {
+        return model_id;
+    }
+
+    public String getModel_make_id() {
+        return model_make_id;
+    }
+
+    public String getModel_name() {
+        return model_name;
+    }
+
+    public String getModel_trim() {
+        return model_trim;
+    }
+
+    public int getModel_year() {
+        return model_year;
     }
 
     @Override

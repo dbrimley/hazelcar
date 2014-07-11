@@ -3,10 +3,12 @@ package com.craftedbytes.hazelcar.domain;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by dbrimley on 11/07/2014.
  */
-public class Car {
+public class Car implements Serializable {
 
     private CarKey carKey;
 
@@ -127,6 +129,146 @@ public class Car {
         this.model_make_display = model_make_display;
         this.make_display = make_display;
         this.make_country = make_country;
+    }
+
+    public CarKey getCarKey() {
+        return carKey;
+    }
+
+    public String getModel_body() {
+        return model_body;
+    }
+
+    public String getModel_engine_position() {
+        return model_engine_position;
+    }
+
+    public int getModel_engine_cc() {
+        return model_engine_cc;
+    }
+
+    public int getModel_engine_cyl() {
+        return model_engine_cyl;
+    }
+
+    public String getModel_engine_type() {
+        return model_engine_type;
+    }
+
+    public int getModel_engine_valves_per_cyl() {
+        return model_engine_valves_per_cyl;
+    }
+
+    public int getModel_engine_power_ps() {
+        return model_engine_power_ps;
+    }
+
+    public int getModel_engine_power_rpm() {
+        return model_engine_power_rpm;
+    }
+
+    public int getModel_engine_torque_nm() {
+        return model_engine_torque_nm;
+    }
+
+    public int getModel_engine_torque_rpm() {
+        return model_engine_torque_rpm;
+    }
+
+    public int getModel_engine_bore_mm() {
+        return model_engine_bore_mm;
+    }
+
+    public int getModel_engine_stroke_mm() {
+        return model_engine_stroke_mm;
+    }
+
+    public String getModel_engine_compression() {
+        return model_engine_compression;
+    }
+
+    public String getModel_engine_fuel() {
+        return model_engine_fuel;
+    }
+
+    public int getModel_top_speed_kph() {
+        return model_top_speed_kph;
+    }
+
+    public float getModel_0_to_100_kph() {
+        return model_0_to_100_kph;
+    }
+
+    public String getModel_drive() {
+        return model_drive;
+    }
+
+    public String getModel_transmission_type() {
+        return model_transmission_type;
+    }
+
+    public int getModel_seats() {
+        return model_seats;
+    }
+
+    public int getModel_doors() {
+        return model_doors;
+    }
+
+    public int getModel_weight_kg() {
+        return model_weight_kg;
+    }
+
+    public int getModel_length_mm() {
+        return model_length_mm;
+    }
+
+    public int getModel_height_mm() {
+        return model_height_mm;
+    }
+
+    public int getModel_width_mm() {
+        return model_width_mm;
+    }
+
+    public int getModel_wheelbase_mm() {
+        return model_wheelbase_mm;
+    }
+
+    public float getModel_lkm_hwy() {
+        return model_lkm_hwy;
+    }
+
+    public float getModel_lkm_mixed() {
+        return model_lkm_mixed;
+    }
+
+    public float getModel_lkm_city() {
+        return model_lkm_city;
+    }
+
+    public int getModel_fuel_cap_l() {
+        return model_fuel_cap_l;
+    }
+
+    public boolean isModel_sold_in_us() {
+        return model_sold_in_us;
+    }
+
+    public float getModel_co2() {
+        return model_co2;
+    }
+
+    public String getModel_make_display() {
+        return model_make_display;
+    }
+
+    public String getMake_display() {
+        return make_display;
+    }
+
+    public String getMake_country() {
+        return make_country;
     }
 
     @Override
