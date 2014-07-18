@@ -19,6 +19,9 @@ public class CarJSONLoader {
 
     private HazelcastInstance hazelcastInstance;
 
+    public List<Car> carList;
+
+
     public CarJSONLoader(HazelcastInstance hazelcastInstance){
         this.hazelcastInstance = hazelcastInstance;
     }
@@ -29,7 +32,7 @@ public class CarJSONLoader {
         InputStream inputStream = CarJSONLoader.class.getResourceAsStream("/cars.json");
 
         try {
-            List<Car> carList = mapper.readValue(inputStream, new TypeReference<List<Car>>(){});
+            carList = mapper.readValue(inputStream, new TypeReference<List<Car>>(){});
             Map<CarKey,Car> carMap = hazelcastInstance.getMap("cars");
             for(Car car:carList){
                 carMap.put(car.getCarKey(),car);

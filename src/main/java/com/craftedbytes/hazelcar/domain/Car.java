@@ -1,16 +1,22 @@
 package com.craftedbytes.hazelcar.domain;
 
+import com.hazelcast.nio.serialization.Portable;
+import com.hazelcast.nio.serialization.PortableReader;
+import com.hazelcast.nio.serialization.PortableWriter;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
  * Created by dbrimley on 11/07/2014.
  */
-public class Car implements Serializable {
+public class Car implements Portable {
 
-    private CarKey carKey;
+    public static int Id= 5;
+
+    private transient CarKey carKey;
 
     private String model_body;
     private String model_engine_position;
@@ -271,6 +277,98 @@ public class Car implements Serializable {
         return make_country;
     }
 
+    @Override
+    public int getFactoryId() {
+        return PortableFactory.FactoryId;
+    }
+
+    @Override
+    public int getClassId() {
+        return Id;
+    }
+
+    public void writePortable(PortableWriter writer) throws IOException {
+        writer.writeUTF("f0", model_body);
+        writer.writeUTF("f1", model_engine_position);
+        writer.writeInt("f2", model_engine_cc);
+        writer.writeInt("f3", model_engine_cyl);
+        writer.writeUTF("f4", model_engine_type);
+
+        writer.writeInt("f5", model_engine_valves_per_cyl);
+        writer.writeInt("f6", model_engine_power_ps);
+        writer.writeInt("f7", model_engine_power_rpm);
+        writer.writeInt("f8", model_engine_torque_nm);
+        writer.writeInt("f9", model_engine_torque_rpm);
+        writer.writeInt("f10", model_engine_bore_mm);
+        writer.writeInt("f11", model_engine_stroke_mm);
+        writer.writeUTF("f12", model_engine_compression);
+        writer.writeUTF("f13", model_engine_fuel);
+
+        writer.writeInt("f14", model_top_speed_kph);
+        writer.writeFloat("f15", model_0_to_100_kph);
+        writer.writeUTF("f16", model_drive);
+        writer.writeUTF("f17", model_transmission_type);
+        writer.writeInt("f18", model_seats);
+        writer.writeInt("f19", model_doors);
+        writer.writeInt("f20", model_weight_kg);
+        writer.writeInt("f21", model_length_mm);
+        writer.writeInt("f22", model_height_mm);
+        writer.writeInt("f23", model_width_mm);
+        writer.writeInt("f24", model_wheelbase_mm);
+
+        writer.writeFloat("f25", model_lkm_hwy);
+        writer.writeFloat("f26", model_lkm_mixed);
+        writer.writeFloat("f27", model_lkm_city);
+        writer.writeInt("f28", model_fuel_cap_l);
+        writer.writeBoolean("f29", model_sold_in_us);
+        writer.writeFloat("f30", model_co2);
+        writer.writeUTF("f31", model_make_display);
+        writer.writeUTF("f32", make_display);
+        writer.writeUTF("f33", make_country);
+    }
+
+    public void readPortable(PortableReader reader) throws IOException {
+        model_body = reader.readUTF("f0");
+        model_engine_position = reader.readUTF("f1");
+        model_engine_cc = reader.readInt("f2");
+        model_engine_cyl = reader.readInt("f3");
+        model_engine_type = reader.readUTF("f4");
+
+        model_engine_valves_per_cyl = reader.readInt("f5");
+        model_engine_power_ps = reader.readInt("f6");
+        model_engine_power_rpm = reader.readInt("f7");
+        model_engine_torque_nm = reader.readInt("f8");
+        model_engine_torque_rpm = reader.readInt("f9");
+        model_engine_bore_mm = reader.readInt("f10");
+        model_engine_stroke_mm = reader.readInt("f11");
+        model_engine_compression = reader.readUTF("f12");
+        model_engine_fuel = reader.readUTF("f13");
+
+        model_top_speed_kph = reader.readInt("f14");
+        model_0_to_100_kph = reader.readFloat("f15");
+        model_drive = reader.readUTF("f16");
+        model_transmission_type = reader.readUTF("f17");
+        model_seats = reader.readInt("f18");
+        model_doors = reader.readInt("f19");
+        model_weight_kg = reader.readInt("f20");
+        model_length_mm = reader.readInt("f21");
+        model_height_mm = reader.readInt("f22");
+        model_width_mm = reader.readInt("f23");
+        model_wheelbase_mm = reader.readInt("f24");
+
+        model_lkm_hwy = reader.readFloat("f25");
+        model_lkm_mixed = reader.readFloat("f26");
+        model_lkm_city = reader.readFloat("f27");
+        model_fuel_cap_l = reader.readInt("f28");
+        model_sold_in_us = reader.readBoolean("f29");
+        model_co2 = reader.readFloat("f30");
+        model_make_display = reader.readUTF("f31");
+        make_display = reader.readUTF("f32");
+        make_country = reader.readUTF("f33");
+    }
+    public void update(){
+        model_body = model_body+ "MODIFIED";
+    }
     @Override
     public String toString() {
         return carKey.toString();
