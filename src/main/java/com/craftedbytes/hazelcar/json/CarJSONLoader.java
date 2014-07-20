@@ -29,7 +29,7 @@ public class CarJSONLoader {
     public void load() {
 
         ObjectMapper mapper = new ObjectMapper();
-        InputStream inputStream = CarJSONLoader.class.getResourceAsStream("/cars.json");
+        InputStream inputStream = CarJSONLoader.class.getResourceAsStream("/cars-small.json");
 
         try {
             carList = mapper.readValue(inputStream, new TypeReference<List<Car>>(){});
