@@ -16,7 +16,7 @@ public class Car implements Portable {
 
     public static int Id= 5;
 
-    private transient CarKey carKey;
+    private CarKey carKey;
 
     private String model_body;
     private String model_engine_position;
@@ -57,6 +57,10 @@ public class Car implements Portable {
     private String make_country;
 
     public Car(){};
+
+    public Car(CarKey carKey){
+        this.carKey = carKey;
+    }
 
     @JsonCreator
     public Car(@JsonProperty("model_id") int model_id,
@@ -288,6 +292,13 @@ public class Car implements Portable {
     }
 
     public void writePortable(PortableWriter writer) throws IOException {
+
+        writer.writeLong("k0", carKey.getModel_id());
+        writer.writeUTF("k1", carKey.getModel_make_id());
+        writer.writeUTF("k2", carKey.getModel_name());
+        writer.writeUTF("k3", carKey.getModel_trim());
+        writer.writeInt("k4", carKey.getModel_year());
+
         writer.writeUTF("f0", model_body);
         writer.writeUTF("f1", model_engine_position);
         writer.writeInt("f2", model_engine_cc);
@@ -328,6 +339,13 @@ public class Car implements Portable {
     }
 
     public void readPortable(PortableReader reader) throws IOException {
+
+        carKey = new CarKey(reader.readLong("k0"),
+                            reader.readUTF("k1"),
+                            reader.readUTF("k2"),
+                            reader.readUTF("k3"),
+                            reader.readInt("k4"));
+
         model_body = reader.readUTF("f0");
         model_engine_position = reader.readUTF("f1");
         model_engine_cc = reader.readInt("f2");
