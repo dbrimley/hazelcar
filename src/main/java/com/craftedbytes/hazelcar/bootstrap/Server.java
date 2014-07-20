@@ -1,6 +1,7 @@
 package com.craftedbytes.hazelcar.bootstrap;
 
 import com.craftedbytes.hazelcar.domain.Car;
+import com.craftedbytes.hazelcar.domain.CarKey;
 import com.craftedbytes.hazelcar.domain.PortableFactory;
 import com.craftedbytes.hazelcar.json.CarJSONLoader;
 import com.hazelcast.config.Config;
@@ -12,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by dbrimley on 11/07/2014.
@@ -26,7 +28,8 @@ public class Server {
         HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance(xmlConfigBuilder.build());
         CarJSONLoader loader = new CarJSONLoader(hazelcastInstance);
         loader.load();
-
+        Map<CarKey,Car> carMap = hazelcastInstance.getMap("cars");
+        System.out.println(carMap.keySet());
     }
 
 }
